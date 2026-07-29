@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>InkWeb — Vector Graphics Editor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="description" content="InkWeb — a free, browser-based SVG vector graphics editor with an Inkscape-style interface.">
+<meta name="theme-color" content="#26292c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="InkWeb">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ── menu bar ─────────────────────────────────────────────── -->
+  <header id="menubar">
+    <button id="applogo" title="InkWeb" aria-label="InkWeb"></button>
+    <nav id="menus" role="menubar"></nav>
+    <div class="spacer"></div>
+    <div id="titlebar"><span id="doctitle">drawing.svg</span><span id="dirty" hidden>•</span></div>
+    <div class="spacer"></div>
+    <button class="mbtn" data-cmd="view.theme" title="Toggle light / dark theme" data-icon="sun"></button>
+    <button class="mbtn" data-cmd="help.about" title="About InkWeb" data-icon="help"></button>
+    <button class="mbtn only-narrow" id="menu-burger" title="Menu" data-icon="menu"></button>
+  </header>
+
+  <!-- ── command bar ──────────────────────────────────────────── -->
+  <div id="commandbar" class="bar"></div>
+
+  <!-- ── tool controls bar ────────────────────────────────────── -->
+  <div id="toolbar" class="bar"></div>
+
+  <div id="body">
+
+    <!-- ── toolbox ────────────────────────────────────────────── -->
+    <aside id="toolbox" role="toolbar" aria-label="Toolbox"></aside>
+
+    <!-- ── canvas ─────────────────────────────────────────────── -->
+    <main id="canvas-area">
+      <div id="ruler-corner" title="Toggle rulers"></div>
+      <canvas id="ruler-h"></canvas>
+      <canvas id="ruler-v"></canvas>
+      <div id="canvas-wrap">
+        <svg id="viewport" xmlns="http://www.w3.org/2000/svg"></svg>
+        <svg id="overlay" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div id="edit-layer"></div>
+        <div id="canvas-hint"></div>
+      </div>
+      <div id="scroll-h"><div class="thumb"></div></div>
+      <div id="scroll-v"><div class="thumb"></div></div>
+    </main>
+
+    <!-- ── snap bar ───────────────────────────────────────────── -->
+    <aside id="snapbar" role="toolbar" aria-label="Snap controls"></aside>
+
+    <!-- ── docked dialogs ─────────────────────────────────────── -->
+    <aside id="panels" aria-label="Dialogs">
+      <div id="panel-tabs"></div>
+      <div id="panel-body"></div>
+    </aside>
+
+  </div>
+
+  <!-- ── palette ──────────────────────────────────────────────── -->
+  <div id="palette-row">
+    <div id="palette" aria-label="Colour palette"></div>
+    <select id="palette-pick" aria-label="Palette"></select>
+  </div>
+
+  <!-- ── status bar ───────────────────────────────────────────── -->
+  <footer id="statusbar">
+    <div id="style-indicator" title="Fill &amp; stroke of selection">
+      <span class="si-label">F:</span><span class="si-swatch" id="si-fill"></span>
+      <span class="si-label">S:</span><span class="si-swatch" id="si-stroke"></span>
+      <span id="si-width">0</span>
+      <span class="si-label">O:</span><input id="si-opacity" type="range" min="0" max="100" value="100" title="Opacity (%)">
+    </div>
+    <div id="layer-indicator">
+      <button id="layer-vis" data-icon="eye" title="Toggle layer visibility"></button>
+      <button id="layer-lock" data-icon="unlock" title="Toggle layer lock"></button>
+      <select id="layer-select" title="Current layer"></select>
+    </div>
+    <div id="status-msg">Welcome to InkWeb. Pick a tool and start drawing.</div>
+    <div id="coords"><span id="coord-x">0.00</span>, <span id="coord-y">0.00</span></div>
+    <div id="zoombox">
+      <input id="zoom-input" type="text" value="100" size="4" title="Zoom (%)"><span>%</span>
+    </div>
+  </footer>
+
+</div>
+
+<!-- floating scrim used by menus / popovers / mobile sheets -->
+<div id="scrim" hidden></div>
+<div id="modal-root"></div>
+<input type="file" id="file-input" hidden accept=".svg,.svgz,image/svg+xml,image/png,image/jpeg,image/gif,image/webp">
+
+<script type="module" src="js/main.js"></script>
+<noscript><p style="padding:2rem;font:16px system-ui">InkWeb needs JavaScript enabled.</p></noscript>
+</body>
+</html>
